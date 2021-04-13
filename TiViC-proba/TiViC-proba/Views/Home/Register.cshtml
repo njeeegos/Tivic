@@ -1,0 +1,14 @@
+﻿@model TiViC_proba.Models.User
+@{
+    <form asp-controller="Home" asp-action="DodajUsera" method="post">
+        <input hidden asp-for="@Model.userId" />
+        <div class="form-group">
+            <label>Ime:</label>
+            <input asp-for="@Model.ime" />
+            <span asp-validation-for="@Model.ime" />
+        </div>
+        @Html.AntiForgeryToken()
+
+        <button class="btn btn-primary" type="submit">Registruj se</button>
+    </form>
+}

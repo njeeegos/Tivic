@@ -1,0 +1,53 @@
+﻿@model TiViC_proba.Models.Programi_po_KanaluViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    <div>
+        <form asp-controller="Home" asp-action="SearchByChannel" method="post">
+            <div>
+                <label>Kanal</label>
+                <select asp-for="@Model.KanalId" asp-items="@(new SelectList(Model.Kanali, "kanalId", "naziv"))"></select>
+                <span asp-validation-for="@Model.KanalId"></span>
+            </div>
+            <div>
+                <label>Datum</label>
+                <input type="date" asp-for="@Model.Datum" />
+                <span asp-validation-for="@Model.Datum"></span>
+            </div>
+            @Html.AntiForgeryToken()
+            <button class="btn-primary" type="submit">Pretraži</button>
+        </form>
+    </div>
+
+    <br />
+
+    @if (Model.Programi != null && Model.Programi.Count() > 0)
+    {
+        <div>
+            <table class="table table-bordered">
+                <tr class="table-success">
+                    <th>
+                        Vreme
+                    </th>
+                    <th>
+                        Naziv
+                    </th>
+                </tr>
+                @foreach (var item in Model.Programi)
+                {
+                    <tr>
+                        <td>
+                            @item.vreme
+                        </td>
+                        <td>
+                            @*@item.naziv*@
+                            @Html.ActionLink(item.naziv, "Details", new { kanalId = item.kanalId, datum = item.datum, vreme = item.vreme, naziv = item.naziv, opis = item.opis, tip = item.tip })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+}

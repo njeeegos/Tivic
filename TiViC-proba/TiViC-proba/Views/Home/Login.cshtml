@@ -1,0 +1,14 @@
+﻿@model TiViC_proba.Models.User
+@{
+    <form asp-controller="Home" asp-action="LoginUser">
+        <input hidden asp-for="@Model.ime" />
+        <div class="form-group">
+            <label>User ID:</label>
+            <input asp-for="@Model.userId" />
+            <span asp-validation-for="@Model.userId" />
+        </div>
+        @Html.AntiForgeryToken()
+
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+}
